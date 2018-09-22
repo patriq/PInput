@@ -1,0 +1,23 @@
+procedure TPInput.GainFocus(ClientIndex: Integer);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_GainFocus(PID);
+end;
+
+procedure TPInput.LoseFocus(ClientIndex: Integer);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_LoseFocus(PID, True);
+end;
+
+function TPInput.IsFocused(ClientIndex: Integer): boolean;
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	Result := PInput_IsFocused(PID);
+end;

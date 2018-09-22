@@ -1,0 +1,55 @@
+procedure MoveMouse(X, Y: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.MoveMouse(X, Y)
+	else
+		inherited;	
+end;
+
+procedure GetMousePos(var X, Y: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.GetMousePos(X, Y)
+	else
+		inherited;	
+end;
+
+procedure ClickMouse(X, Y: Integer; ClickType: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.ClickMouse(X, Y, ClickType)
+	else
+		inherited;	
+end;
+
+procedure HoldMouse(X, Y: Integer; ClickType: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.HoldMouse(X, Y, ClickType)
+	else
+		inherited;	
+end;
+
+procedure ReleaseMouse(X, Y: Integer; ClickType: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.ReleaseMouse(X, Y, ClickType)
+	else
+		inherited;
+end;
+
+function IsMouseButtonDown(ClickType: Integer): Boolean; override;
+begin
+	if PInput.OverrideSimba then
+		Result := PInput.IsMouseButtonDown(ClickType)
+	else
+		inherited;
+end;        
+
+procedure ScrollMouse(X, Y: Integer; Up: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.ScrollMouse(X, Y, Up)
+	else
+		inherited;
+end;

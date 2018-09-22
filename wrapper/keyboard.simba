@@ -1,0 +1,39 @@
+procedure TPInput.PressKey(ClientIndex: Integer; KeyCode: Word);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_PressKey(PID, KeyCode);
+end;
+
+procedure TPInput.KeyUp(ClientIndex: Integer; KeyCode: Word);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_KeyUp(PID, KeyCode);
+end;
+
+procedure TPInput.KeyDown(ClientIndex: Integer; KeyCode: Word);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_KeyDown(PID, KeyCode);
+end;
+
+function TPInput.IsKeyDown(ClientIndex: Integer; KeyCode: Word): Boolean;
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	Result := PInput_IsKeyDown(PID, KeyCode);
+end;
+
+procedure TPInput.SendKeys(ClientIndex: Integer; const Text: string; KeyWait, KeyModWait: integer);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_SendKeys(PID, Text, KeyWait, KeyModWait);
+end;

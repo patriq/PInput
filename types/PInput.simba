@@ -1,0 +1,18 @@
+type
+  TPInput = record
+    PIDs: array of Int32;
+    OverrideSimba: boolean;
+  end;
+
+var
+  PInput: TPInput;
+
+function TPInput.GetPID(ClientIndex: Integer): Int32;
+begin
+	Result := Self.PIDs[ClientIndex];
+end;
+
+function TPInput.Clients(): Integer;
+begin
+	Result := Length(Self.PIDs);
+end;

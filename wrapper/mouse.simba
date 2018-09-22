@@ -1,0 +1,55 @@
+procedure TPInput.GetMousePos(ClientIndex: Integer; var X, Y: Integer);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_GetMousePos(PID, X, Y);
+end;
+
+function TPInput.IsMouseButtonDown(ClientIndex: Integer; ClickType: TClickType): Boolean;
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	Result := PInput_IsMouseButtonDown(PID, ClickType);
+end;
+
+procedure TPInput.MoveMouse(ClientIndex, X, Y: Int32);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_MoveMouse(PID, X, Y);
+end;
+
+procedure TPInput.HoldMouse(ClientIndex, X, Y: Integer; ClickType: TClickType);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_HoldMouse(PID, X, Y, ClickType);
+end;
+
+procedure TPInput.ReleaseMouse(ClientIndex, X, Y: Integer; ClickType: TClickType);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_ReleaseMouse(PID, X, Y, ClickType);
+end;
+
+procedure TPInput.ClickMouse(ClientIndex, X, Y: Integer; ClickType: TClickType);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_ClickMouse(PID, X, Y, ClickType);
+end;
+
+procedure TPInput.ScrollMouse(ClientIndex, X, Y, Up: Integer);
+var
+	PID: Int32;
+begin
+	PID := Self.GetPID(ClientIndex);
+	PInput_ScrollMouse(PID, X, Y, Up);
+end;

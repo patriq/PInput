@@ -1,0 +1,59 @@
+procedure TPInput.GetMousePos(var X, Y: Integer); overload;
+begin
+	Self.GetMousePos(0, X, Y);
+end;
+
+function TPInput.IsMouseButtonDown(ClickType: TClickType): Boolean; overload;
+begin
+	Result := Self.IsMouseButtonDown(0, ClickType);
+end;
+
+procedure TPInput.MoveMouse(X, Y: Integer); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.MoveMouse(ClientIndex, X, Y);
+	end;
+end;
+
+procedure TPInput.HoldMouse(X, Y: Integer; ClickType: TClickType); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.HoldMouse(ClientIndex, X, Y, ClickType);
+	end;
+end;
+
+procedure TPInput.ReleaseMouse(X, Y: Integer; ClickType: TClickType); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.ReleaseMouse(ClientIndex, X, Y, ClickType);
+	end;
+end;
+
+procedure TPInput.ClickMouse(X, Y: Integer; ClickType: TClickType); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.ClickMouse(ClientIndex, X, Y, ClickType);
+	end;
+end;
+
+procedure TPInput.ScrollMouse(X, Y, Up: Integer); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.ScrollMouse(ClientIndex, X, Y, Up);
+	end;
+end;

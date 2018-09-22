@@ -1,0 +1,39 @@
+procedure KeyDown(KeyCode: Word); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.KeyDown(KeyCode)
+	else
+		inherited;	
+end;
+
+procedure KeyUp(KeyCode: Word); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.KeyUp(KeyCode)
+	else
+		inherited;	
+end;
+
+procedure SendKeys(const Text: string; KeyWait, KeyModWait: Integer); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.SendKeys(Text, KeyWait, KeyModWait)
+	else
+		inherited;	
+end;
+
+procedure PressKey(KeyCode: Word); override;
+begin
+	if PInput.OverrideSimba then
+		PInput.PressKey(KeyCode)
+	else
+		inherited;	
+end;
+
+function IsKeyDown(KeyCode: Word): Boolean; override;
+begin
+	if PInput.OverrideSimba then
+		Result := PInput.IsKeyDown(KeyCode)
+	else
+		inherited;	
+end;

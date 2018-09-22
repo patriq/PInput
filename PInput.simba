@@ -1,0 +1,76 @@
+{$loadlib PInput}
+
+{$include_once types/PInput.simba}
+{$include_once wrapper/mouse.simba}
+{$include_once wrapper/keyboard.simba}
+{$include_once wrapper/focus.simba}
+{$include_once wrapper/multiple/mouse.simba}
+{$include_once wrapper/multiple/keyboard.simba}
+{$include_once wrapper/multiple/focus.simba}
+{$include_once override/mouse.simba}
+{$include_once override/keyboard.simba}
+
+{$IFNDECL WINAPI_CC}
+  {$IFDEF CPU386}
+    const WINAPI_CC = ' stdcall';
+  {$ELSE}
+    const WINAPI_CC = ' win64';
+  {$ENDIF}
+{$ENDIF}
+
+{$IFNDECL HWND}
+  type HWND = type PtrUInt;
+{$ENDIF}
+
+{$IFNDECL HWNDArray}
+  type HWNDArray = array of HWND;
+  type PHWNDArray = ^HWNDArray;
+{$ENDIF}
+
+procedure TPInput.Setup(PIDs: array of Integer);
+var
+	PIDIndex: Integer;
+begin
+	Self.PIDs := PIDs;
+	Self.OverrideSimba := false;
+
+	// Create every PID
+	for PIDIndex := 0 to High(Self.PIDs) do
+	begin
+		if not PInput_Create(Self.PIDs[PIDIndex]) then
+		begin
+	    	WriteLn('Unable to create PInput (Either failed or client already had KInput injected)');
+		end;
+	end;
+end;
+
+procedure TPInput.Setup(PID: Integer); overload;
+begin
+	Self.Setup([PID]);
+	Self.OverrideSimba := true;
+end;
+
+procedure TPInput.Setup(); overload;
+  function GetWindowThreadProcessID(Handle: HWND; var PID: UInt32): UInt32; static; external 'GetWindowThreadProcessId@user32.dll'+WINAPI_CC;
+var
+	PID: UInt32;
+begin
+	WriteLn('No PID given, attaching to the current targeted window.');
+	GetWindowThreadProcessID(GetNativeWindow(), PID);
+	WriteLn('Got PID: ', PID);
+	Self.Setup(PID);
+end;
+
+procedure TPInput.Shutdown();
+var
+	PIDIndex: Integer;
+begin
+	// Delete all PIDs
+	for PIDIndex := 0 to High(Self.PIDs) do
+	begin
+		PInput_Delete(Self.PIDs[PIDIndex]);
+	end;
+end;
+
+begin
+end;

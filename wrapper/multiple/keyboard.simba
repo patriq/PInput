@@ -1,0 +1,44 @@
+procedure TPInput.PressKey(KeyCode: Word); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.PressKey(ClientIndex, KeyCode);
+	end;
+end;
+
+procedure TPInput.KeyUp(KeyCode: Word); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.KeyUp(ClientIndex, KeyCode);
+	end;
+end;
+
+procedure TPInput.KeyDown(KeyCode: Word); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.KeyDown(ClientIndex, KeyCode);
+	end;
+end;
+
+function TPInput.IsKeyDown(KeyCode: Word): Boolean; overload;
+begin
+	Result := PInput_IsKeyDown(0, KeyCode);
+end;
+
+procedure TPInput.SendKeys(const Text: string; KeyWait, KeyModWait: integer); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.SendKeys(ClientIndex, Text, KeyWait, KeyModWait);
+	end;
+end;

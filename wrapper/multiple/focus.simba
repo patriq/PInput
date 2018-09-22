@@ -1,0 +1,24 @@
+procedure TPInput.GainFocus(); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.GainFocus(ClientIndex);
+	end;
+end;
+
+procedure TPInput.LoseFocus(); overload;
+var
+	ClientIndex: Integer;
+begin
+	for ClientIndex := 0 to Self.Clients - 1 do
+	begin
+		Self.LoseFocus(ClientIndex);
+	end;
+end;
+
+function TPInput.IsFocused(): boolean; overload;
+begin
+	Result := Self.IsFocused(0);
+end;
